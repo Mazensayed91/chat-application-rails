@@ -4,13 +4,11 @@ module Api
       protect_from_forgery with: :null_session
 
       def show
-        application = Application.where(token: params[:id])
+        application = Application.where(token: params[:application_token])
 
         if application
-          print(Chat.where(application_id: application.as_json[0][:id]).explain)
           chats = application[0].chats
-
-          render json: {status: 'SUCCESS', message: 'Loaded Apps', data: chats}, status: :ok
+          render json: {status: 'SUCCESS', message: 'Loaded Apps', data: chats.as_json(only: [:chat_num, :messages_count, :created_at])}, status: :ok
         else
           render json: {status: 'ERROR'}, status: :not_found
         end

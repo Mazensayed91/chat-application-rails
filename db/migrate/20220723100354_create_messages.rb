@@ -6,7 +6,7 @@ class CreateMessages < ActiveRecord::Migration[7.0]
       t.bigint :chat_id
       t.timestamps
     end
-    add_index :messages, :message_number
+    add_index :messages, :message_num
     add_foreign_key :messages, :chats, on_delete: :cascade
   end
 end
