@@ -23,7 +23,7 @@ module Api
         application = Application.where(token: params[:id])
         print(application.as_json())
         if application
-          render json: {status: 'SUCCESS', data: application.as_json(only: [:token, :name, :created_at])}, status: :ok
+          render json: {status: 'SUCCESS', data: application.as_json(only: [:token, :name, :created_at, :chats_count])}, status: :ok
         else
           render json: {status: 'ERROR'}, status: :not_found
         end

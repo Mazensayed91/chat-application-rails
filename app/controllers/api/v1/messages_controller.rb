@@ -31,6 +31,7 @@ module Api
 
             message = chat[0].messages.create({message_num: current_message_number, content: params[:content]})
             if message.save
+              UpdateMessagesCountJob.perform_later(params[:application_token], params[:chat_num])
               render json: {status: 'SUCCESS', message: 'Create message', data: message.as_json(only: [:message_num, :created_at, :content])}, status: :ok
             else
               render json: {status: 'ERROR', message: 'message not created', data: message.errors }, status: :unprocessable_entity

@@ -24,6 +24,8 @@ module Api
           chat = application[0].chats.create({chat_num: current_chat_number})
 
           if chat.save
+            # Call async method to update chats_count of this application as the chat is saved
+            UpdateChatsCountJob.perform_later(params[:application_token])
             render json: {status: 'SUCCESS', message: 'Create app', data: chat.as_json(only: [:chat_num, :created_at])}, status: :ok
           else
             render json: {status: 'ERROR', message: 'Application not created', data: chat.errors }, status: :unprocessable_entity
