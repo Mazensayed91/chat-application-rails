@@ -4,12 +4,20 @@ module Api
       protect_from_forgery with: :null_session
 
       def show
+        cached_messages = Rails.cache.read("get_messages-"+params[:application_token]+"-"+params[:chat_num])
+
+        if !cached_messages.blank?
+          render json: {status: 'SUCCESS', message: 'Loaded messages', data: cached_messages.as_json(only: [:message_num, :created_at, :content])}, status: :ok
+          return
+        end
+
         application = Application.where(token: params[:application_token])
 
         if application[0]
           chats = application[0].chats
           if chats[0]
             messages = chats.where(chat_num: params[:chat_num])[0].messages
+            Rails.cache.write("get_messages-"+params[:application_token]+"-"+params[:chat_num], messages, expire_in: 5.minutes)
             render json: {status: 'SUCCESS', message: 'Loaded messages', data: messages.as_json(only: [:message_num, :created_at, :content])}, status: :ok
           else
             render json: {status: 'ERROR'}, status: :not_found
@@ -31,6 +39,8 @@ module Api
 
             # Call async method to create the chat record
             CreateMessageJob.perform_later(chat[0], current_message_number, params[:content])
+            Rails.cache.delete("get_messages-"+params[:application_token]+"-"+params[:chat_num])
+
 
             # Call async method to update messages_count of this chat.
             UpdateMessagesCountJob.perform_later(params[:application_token], params[:chat_num])
