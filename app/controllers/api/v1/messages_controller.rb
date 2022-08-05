@@ -37,17 +37,14 @@ module Api
             last_message_number = chat[0].messages.maximum(:message_num)
             current_message_number = last_message_number ? last_message_number + 1 : 1
 
-            message = chat[0].messages.create({message_num: current_message_number, content: params[:content]})
-            if message.save
+            # Call async method to create the chat record
+            CreateMessageJob.perform_later(chat[0], current_message_number, params[:content])
+            Rails.cache.delete("get_messages-"+params[:application_token]+"-"+params[:chat_num])
 
-              Rails.cache.delete("get_messages-"+params[:application_token]+"-"+params[:chat_num])
 
-              UpdateMessagesCountJob.perform_later(params[:application_token], params[:chat_num])
-              render json: {status: 'SUCCESS', message: 'Create message', data: message.as_json(only: [:message_num, :created_at, :content])}, status: :ok
-            else
-              render json: {status: 'ERROR', message: 'message not created', data: message.errors }, status: :unprocessable_entity
-            end
-
+            # Call async method to update messages_count of this chat.
+            UpdateMessagesCountJob.perform_later(params[:application_token], params[:chat_num])
+            render json: {status: 'SUCCESS', message: 'Create message', data: { message_num: current_message_number, content: params[:content]}}, status: :ok
           end
         else
           render json: {status: 'ERROR'}, status: :not_found
