@@ -21,18 +21,14 @@ module Api
           last_chat_number = application[0].chats.maximum(:chat_num)
           current_chat_number = last_chat_number ? last_chat_number + 1 : 1
 
-          chat = application[0].chats.create({chat_num: current_chat_number})
+          # Call async method to create the chat record
+          CreateChatJob.perform_later(application[0], current_chat_number)
+          # Call async method to update chats_count of this application.
+          UpdateChatsCountJob.perform_later(params[:application_token])
 
-          if chat.save
-            # Call async method to update chats_count of this application as the chat is saved
-            UpdateChatsCountJob.perform_later(params[:application_token])
-            render json: {status: 'SUCCESS', message: 'Create app', data: chat.as_json(only: [:chat_num, :created_at])}, status: :ok
-          else
-            render json: {status: 'ERROR', message: 'Application not created', data: chat.errors }, status: :unprocessable_entity
-          end
-
+          render json: {status: 'SUCCESS', message: 'chat created', data: {chat_num: current_chat_number}}, status: :ok
         else
-          render json: {status: 'ERROR'}, status: :not_found
+          render json: {status: 'App does not exit'}, status: :not_found
         end
       end
 
