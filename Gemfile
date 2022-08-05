@@ -9,6 +9,8 @@ gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem 'elasticsearch-model'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', git: "https://github.com/sparklemotion/sqlite3-ruby"
 
@@ -70,3 +72,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "elasticsearch-rails", "~> 7.2"
+gem "elasticsearch-persistence", "~> 7.2"

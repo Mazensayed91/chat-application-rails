@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_100354) do
     t.integer "chat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "\"message_number\"", name: "index_messages_on_message_number"
+    t.index "\"message_num\"", name: "index_messages_on_message_num"
   end
 
   add_foreign_key "chats", "applications", on_delete: :cascade
