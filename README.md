@@ -326,3 +326,9 @@ We are using Redis to cache:
 Elasticsearch allows you to store, search, and analyze huge volumes of data quickly and in near real-time and give back answers in milliseconds. It's able to achieve fast search responses because instead of searching the text directly, it searches an index.
 
 That's why we used it to search in the messages of a specific chat.
+
+#### Application Unit Testing
+
+| UnitTest                                  |                  Description                     | Expected Return |
+| ------------------------------------------| -------------------------------------------------|-----------------|
+|testing_app_happy_scenario                 | Gets all apps                                    |     200         |
