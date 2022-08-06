@@ -4,7 +4,7 @@ Instachat is a chatting system that aims to make it easier to communicate with o
 ## Technology Stack
 - Language: Ruby
 - Frameworks: Rails
-- DB: SQLite
+- DB: MySQL
 - Caching: Redis
 - Background Processing: ActiveJob
 
@@ -15,7 +15,7 @@ Instachat is a chatting system that aims to make it easier to communicate with o
 
 ## Getting Started
 
-- Clone the repo ```https://github.com/Mazensayed91/fleet-management-system.git```
+- Clone the repo ```https://github.com/Mazensayed91/chat-application-rails.git```
 - ```cd chat-application-rails```
 - Bundle install
 
