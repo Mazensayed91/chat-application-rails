@@ -295,5 +295,40 @@ Example errors the user may incounter using instachat:
         ]
     }
    ```
-   
+
+## Database
+![image](https://user-images.githubusercontent.com/54520113/183237934-e57ebcbd-55ca-4818-a439-9f62952c999c.png)
+
+## ActiveJob
+We have many time consuming tasks that can block users from using the website and also assuming that the API will be used by multiple servers we decided to process creatation requests asynchronously in the background below you can find a list of jobs that we processing in the background.
+Also, chat_count for application and message_count for chat doesn't have to be live
+
+### Jobs
+* CreateAppJob
+* CreateChatJob
+* CreateMessageJob
+* UpdateChatsCountJob
+* UpdateMessagesCountJob
+
+
+
+## Redis
+
+Since Redis stores its data on the primary memory, reading and writing are made faster than databases that store data on disks. This is why we used Redis as a cache in many applications, to provide results rapidly.
+
+We are using Redis to cache:
+* Applications
+* Chats
+* Messages
+
+
+## Elasticserach
+
+Elasticsearch allows you to store, search, and analyze huge volumes of data quickly and in near real-time and give back answers in milliseconds. It's able to achieve fast search responses because instead of searching the text directly, it searches an index.
+
+That's why we used it to search in the messages of a specific chat.
+
+
+
+
    
