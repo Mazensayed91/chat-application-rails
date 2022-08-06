@@ -10,6 +10,5 @@ class CreateChats < ActiveRecord::Migration[7.0]
     add_index :chats, :chat_num
     change_column_default :chats, :messages_count, 0
     add_foreign_key :chats, :applications, on_delete: :cascade
-
   end
 end

@@ -10,34 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_23_100354) do
-  create_table "applications", force: :cascade do |t|
-    t.string "name"
-    t.string "token"
-    t.integer "chats_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["token"], name: "index_applications_on_token"
+ActiveRecord::Schema[7.0].define(version: 20_220_723_100_354) do
+  create_table 'applications', force: :cascade do |t|
+    t.string 'name'
+    t.string 'token'
+    t.integer 'chats_count', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['token'], name: 'index_applications_on_token'
   end
 
-  create_table "chats", force: :cascade do |t|
-    t.integer "chat_num"
-    t.integer "application_id"
-    t.integer "messages_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_num"], name: "index_chats_on_chat_num"
+  create_table 'chats', force: :cascade do |t|
+    t.integer 'chat_num'
+    t.integer 'application_id'
+    t.integer 'messages_count', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['chat_num'], name: 'index_chats_on_chat_num'
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.integer "message_num"
-    t.text "content"
-    t.integer "chat_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "\"message_num\"", name: "index_messages_on_message_num"
+  create_table 'messages', force: :cascade do |t|
+    t.integer 'message_num'
+    t.text 'content'
+    t.integer 'chat_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index '"message_num"', name: 'index_messages_on_message_num'
   end
 
-  add_foreign_key "chats", "applications", on_delete: :cascade
-  add_foreign_key "messages", "chats", on_delete: :cascade
+  add_foreign_key 'chats', 'applications', on_delete: :cascade
+  add_foreign_key 'messages', 'chats', on_delete: :cascade
 end

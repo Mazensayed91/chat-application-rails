@@ -9,6 +9,5 @@ class CreateApplications < ActiveRecord::Migration[7.0]
 
     add_index :applications, :token
     change_column_default :applications, :chats_count, 0
-
   end
 end

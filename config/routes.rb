@@ -10,6 +10,4 @@ Rails.application.routes.draw do
       post 'applications/:application_token/chats/:chat_num/messages/search', to: 'messages#search'
     end
   end
-
-
 end

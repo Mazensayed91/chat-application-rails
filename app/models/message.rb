@@ -4,8 +4,8 @@ class Message < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  index_name ["content"].join("_")
-  document_type self.name.downcase
+  index_name ['content'].join('_')
+  document_type name.downcase
 
   settings index: { number_of_shards: 1 } do
     mapping dynamic: false do
@@ -25,7 +25,7 @@ class Message < ApplicationRecord
                 query: query,
                 fields: ['content']
               }
-            },
+            }
           ],
           filter: [
             {
@@ -36,7 +36,6 @@ class Message < ApplicationRecord
       }
     }
 
-    self.__elasticsearch__.search(params).records
+    __elasticsearch__.search(params).records
   end
-
 end
