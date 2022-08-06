@@ -7,6 +7,7 @@ Instachat is a chatting system that aims to make it easier to communicate with o
 - DB: MySQL
 - Caching: Redis
 - Background Processing: ActiveJob
+- Unit testing: Rspec
 
 ## Prerequisites
 
@@ -16,7 +17,7 @@ Instachat is a chatting system that aims to make it easier to communicate with o
 
 - Clone the repo ```https://github.com/Mazensayed91/chat-application-rails.git```
 - ```cd chat-application-rails```
-- Run docker-compose up
+- Run ``` docker-compose up ```
 
 
 ## API Reference
@@ -327,8 +328,8 @@ Elasticsearch allows you to store, search, and analyze huge volumes of data quic
 
 That's why we used it to search in the messages of a specific chat.
 
-#### Application Unit Testing
+## Application Unit Testing
 
 | UnitTest                                  |                  Description                     | Expected Return |
 | ------------------------------------------| -------------------------------------------------|-----------------|
-|testing_app_happy_scenario                 | Gets all apps                                    |     200         |
+|get_apps_spec                              | Gets all apps                                    |     200         |
