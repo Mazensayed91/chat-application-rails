@@ -19,6 +19,11 @@ Instachat is a chatting system that aims to make it easier to communicate with o
 - ```cd chat-application-rails```
 - Run ``` docker-compose up ```
 
+- If you are using docker desktop you should be able to see response like this one:
+
+![image](https://user-images.githubusercontent.com/54520113/183265020-b5da0012-8b93-4d2a-8548-7bc373ca63a9.png)
+
+
 
 ## API Reference
 
