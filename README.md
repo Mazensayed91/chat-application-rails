@@ -10,14 +10,13 @@ Instachat is a chatting system that aims to make it easier to communicate with o
 
 ## Prerequisites
 
-- Ruby 3.0.2
-- Rails 7
+- Docker
 
 ## Getting Started
 
 - Clone the repo ```https://github.com/Mazensayed91/chat-application-rails.git```
 - ```cd chat-application-rails```
-- Bundle install
+- Run docker-compose up
 
 
 ## API Reference
@@ -327,8 +326,3 @@ We are using Redis to cache:
 Elasticsearch allows you to store, search, and analyze huge volumes of data quickly and in near real-time and give back answers in milliseconds. It's able to achieve fast search responses because instead of searching the text directly, it searches an index.
 
 That's why we used it to search in the messages of a specific chat.
-
-
-
-
-   
